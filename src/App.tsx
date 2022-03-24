@@ -8,7 +8,7 @@ type Piece = Player | '';
 const Slot = ({piece, firstFree}: {firstFree: boolean; piece: Piece}) => {
   return (
     <div data-testid="slot"
-         className={`Slot Piece ${piece && `Player-${piece}`} ${firstFree && 'FirstFree'}`}
+         className={`Slot PlayerColor ${piece && `Player-${piece}`} ${firstFree && 'FirstFree'}`}
     />
   );
 };
@@ -53,7 +53,7 @@ const Board = ({onClick, pieces}: {
 const NextPlayer = ({player}: {player: Player}) => {
   return (
     <div data-testid="nextPlayer"
-         className={`NextPlayer Piece Player-${player}`}
+         className={`NextPlayer PlayerColor Player-${player}`}
     />
   );
 };

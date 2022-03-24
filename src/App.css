@@ -5,8 +5,9 @@
   margin: auto;
   display: flex;
   min-height: 50vh;
-  max-height: 70vh;
+  max-height: calc(70vh * 6/7);
   min-width: calc(50vh * 7/6);
+  max-width: 70vh;
 }
 
 .App {
@@ -29,19 +30,18 @@
 }
 
 .NextPlayer {
-  width: 8vw;
-  height: 8vw;
-  border-radius: 50%;
+  width: 70vw;
+  height: 1vh;
+  max-width: 70vh;
   border: solid thin black;
-  margin: auto;
-  margin-bottom: 20px;
+  margin: auto auto 20px;
 }
 
-.Piece.Player-R {
+.PlayerColor.Player-R {
   background-color: red;
 }
 
-.Piece.Player-Y {
+.PlayerColor.Player-Y {
   background-color: yellow;
 }
 
