@@ -61,3 +61,8 @@
 .App.Player-R .Column:hover .FirstFree {
   background-color: #ffc2c2;
 }
+
+.Restart {
+  display: block;
+  margin: 6vh auto;
+}

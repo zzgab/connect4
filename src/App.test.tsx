@@ -5,6 +5,7 @@ import App from './App';
 describe('connect4',  () => {
   beforeEach(() => {
     render(<App />);
+    expect.hasAssertions();
   });
 
   it('renders game board', () => {
@@ -66,5 +67,20 @@ describe('connect4',  () => {
 
     column.click();
     expect(slots[1]).toHaveClass('FirstFree');
+  });
+
+  it('has a Restart button', () => {
+    const column = screen.getAllByTestId('column')[3];
+    const slots = getAllByTestId(column, 'slot');
+    expect(slots[0]).toHaveClass('FirstFree');
+    expect(screen.getByTestId('nextPlayer')).toHaveClass('Player-Y');
+    column.click();
+    expect(slots[0]).not.toHaveClass('FirstFree');
+    expect(screen.getByTestId('nextPlayer')).toHaveClass('Player-R');
+
+    screen.getByTestId('restart').click();
+    expect(slots[0]).toHaveClass('FirstFree');
+
+    expect(screen.getByTestId('nextPlayer')).toHaveClass('Player-Y');
   });
 });

@@ -57,14 +57,14 @@ const NextPlayer = ({player}: {player: Player}) => {
   );
 };
 
+const initialBoard = Array(7).fill(
+  Array(6).fill('')
+) as Piece[][];
+
 function App() {
   const [player, setPlayer] = useState('Y' as Player);
 
-  const [pieces, setPieces] = useState(
-    Array(7).fill(
-      Array(6).fill('')
-    ) as Piece[][]
-  );
+  const [pieces, setPieces] = useState(initialBoard);
 
   const lowestFreeSlotInCol = (colNum: number) =>
     pieces[colNum].findIndex(piece => piece === '');
@@ -84,10 +84,16 @@ function App() {
     setPlayer(player === 'R' ? 'Y' : 'R');
   };
 
+  const onRestart = () => {
+    setPlayer('Y');
+    setPieces(initialBoard);
+  };
+
   return (
     <div className={`App Player-${player}`}>
       <NextPlayer player={player} />
       <Board onClick={onClickColumn} pieces={pieces} />
+      <button data-testid="restart" className="Restart" onClick={onRestart}>Restart</button>
     </div>
   );
 }
