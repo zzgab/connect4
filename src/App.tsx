@@ -2,6 +2,7 @@ import React, {useMemo, useState} from "react";
 import './App.css';
 
 type Player = 'R' | 'Y';
+const initialPlayer: Player = 'Y';
 type Piece = Player | '';
 
 const Slot = ({piece, firstFree}: {firstFree: boolean; piece: Piece}) => {
@@ -62,7 +63,7 @@ const initialBoard = Array(7).fill(
 ) as Piece[][];
 
 function App() {
-  const [player, setPlayer] = useState('Y' as Player);
+  const [player, setPlayer] = useState(initialPlayer);
 
   const [pieces, setPieces] = useState(initialBoard);
 
@@ -85,7 +86,7 @@ function App() {
   };
 
   const onRestart = () => {
-    setPlayer('Y');
+    setPlayer(initialPlayer);
     setPieces(initialBoard);
   };
 
