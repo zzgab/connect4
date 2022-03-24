@@ -64,7 +64,6 @@ const initialBoard = Array(7).fill(
 
 function App() {
   const [player, setPlayer] = useState(initialPlayer);
-
   const [pieces, setPieces] = useState(initialBoard);
 
   const lowestFreeSlotInCol = (colNum: number) =>
