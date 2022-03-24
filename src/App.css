@@ -37,11 +37,11 @@
   margin-bottom: 20px;
 }
 
-.Slot.Player-R {
+.Piece.Player-R {
   background-color: red;
 }
 
-.Slot.Player-Y {
+.Piece.Player-Y {
   background-color: yellow;
 }
 
