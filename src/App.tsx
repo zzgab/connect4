@@ -7,14 +7,16 @@ type Piece = Player | '';
 const Slot = ({piece, firstFree}: {firstFree: boolean; piece: Piece}) => {
   return (
     <div data-testid="slot"
-         className={`Slot ${piece !== '' ? `Player-${piece}` : ''} ${firstFree && 'FirstFree'}`}
+         className={`Slot ${piece && `Player-${piece}`} ${firstFree && 'FirstFree'}`}
     />
   );
 };
 
 const Column = ({pieces, onClick}: {pieces: Piece[]; onClick: () => void}) => {
-  const lowestFreeIndex = useMemo(() => pieces.findIndex(slot => slot === ''),
-  [pieces]);
+  const lowestFreeIndex = useMemo(
+    () => pieces.findIndex(slot => slot === '')
+    , [pieces])
+  ;
 
   return (
     <div data-testid={"column"}
@@ -30,7 +32,9 @@ const Column = ({pieces, onClick}: {pieces: Piece[]; onClick: () => void}) => {
   );
 };
 
-const Board = ({onClick, pieces}: {pieces: Piece[][]; onClick: (colNum: number) => void}) => {
+const Board = ({onClick, pieces}: {
+  pieces: Piece[][]; onClick: (colNum: number) => void
+}) => {
   return (
     <div data-testid="board"
          className="Board"
@@ -70,8 +74,13 @@ function App() {
     if (floorNum === -1) {
       return;
     }
-    setPieces(pieces.map((colOfPieces, col) => col !== colNum ? colOfPieces :
-      colOfPieces.map((piece, floor) => floor !== floorNum ? piece : player)));
+    setPieces(pieces.map((colOfPieces, col) =>
+      col !== colNum
+        ? colOfPieces
+        : colOfPieces.map((piece, floor) =>
+          floor !== floorNum ? piece : player
+        )
+    ));
     setPlayer(player === 'R' ? 'Y' : 'R');
   };
 
