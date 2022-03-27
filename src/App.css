@@ -66,3 +66,7 @@
   display: block;
   margin: 6vh auto;
 }
+
+.Restart::after {
+  content: "⟳"
+}

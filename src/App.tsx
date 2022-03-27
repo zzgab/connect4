@@ -88,7 +88,7 @@ function App() {
       <Board onClick={onClickColumn} pieces={pieces} />
       <button data-testid="restart"
               className="Restart"
-              onClick={onRestart}>Restart</button>
+              onClick={onRestart} />
     </div>
   );
 }
