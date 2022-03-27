@@ -58,28 +58,16 @@ describe('connect4',  () => {
     expect(screen.getByTestId('nextPlayer')).toHaveClass('Player-Y');
   });
 
-  it ('highlights the possible play when hover', () => {
-    const column = screen.getAllByTestId('column')[3];
-    const slots = getAllByTestId(column, 'slot');
-
-    expect(slots[0]).toHaveClass('FirstFree');
-    expect(slots[1]).not.toHaveClass('FirstFree');
-
-    column.click();
-    expect(slots[1]).toHaveClass('FirstFree');
-  });
-
   it('has a Restart button', () => {
     const column = screen.getAllByTestId('column')[3];
     const slots = getAllByTestId(column, 'slot');
-    expect(slots[0]).toHaveClass('FirstFree');
     expect(screen.getByTestId('nextPlayer')).toHaveClass('Player-Y');
     column.click();
-    expect(slots[0]).not.toHaveClass('FirstFree');
+    expect(slots[0]).not.toHaveClass('Free');
     expect(screen.getByTestId('nextPlayer')).toHaveClass('Player-R');
 
     screen.getByTestId('restart').click();
-    expect(slots[0]).toHaveClass('FirstFree');
+    expect(slots[0]).toHaveClass('Free');
 
     expect(screen.getByTestId('nextPlayer')).toHaveClass('Player-Y');
   });

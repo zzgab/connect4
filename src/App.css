@@ -49,16 +49,16 @@
   background-color: #6ab1d7;
 }
 
-.Column:hover .FirstFree {
+.Column:hover .Free:not(.Free + .Free) {
   border-style: solid;
   border-color: lime;
 }
 
-.App.Player-Y .Column:hover .FirstFree {
+.App.Player-Y .Column:hover .Free:not(.Free + .Free) {
   background-color: #fff4c2;
 }
 
-.App.Player-R .Column:hover .FirstFree {
+.App.Player-R .Column:hover .Free:not(.Free + .Free) {
   background-color: #ffc2c2;
 }
 

@@ -1,24 +1,19 @@
-import React, {useMemo, useState} from "react";
+import React, {useState} from "react";
 import './App.css';
 
 type Player = 'R' | 'Y';
 const initialPlayer: Player = 'Y';
 type Piece = Player | '';
 
-const Slot = ({piece, firstFree}: {firstFree: boolean; piece: Piece}) => {
+const Slot = ({piece}: {piece: Piece}) => {
   return (
     <div data-testid="slot"
-         className={`Slot PlayerColor ${piece && `Player-${piece}`} ${firstFree && 'FirstFree'}`}
+         className={`Slot ${piece ? `PlayerColor Player-${piece}` : 'Free'}`}
     />
   );
 };
 
 const Column = ({pieces, onClick}: {pieces: Piece[]; onClick: () => void}) => {
-  const lowestFreeIndex = useMemo(
-    () => pieces.findIndex(slot => slot === '')
-    , [pieces])
-  ;
-
   return (
     <div data-testid={"column"}
          className="Column"
@@ -27,7 +22,6 @@ const Column = ({pieces, onClick}: {pieces: Piece[]; onClick: () => void}) => {
       {pieces.map((cell, i) =>
         <Slot key={i}
               piece={cell}
-              firstFree={i === lowestFreeIndex}
       />)}
     </div>
   );
@@ -48,7 +42,6 @@ const Board = ({onClick, pieces}: {
     </div>
   );
 };
-
 
 const NextPlayer = ({player}: {player: Player}) => {
   return (
@@ -93,7 +86,9 @@ function App() {
     <div className={`App Player-${player}`}>
       <NextPlayer player={player} />
       <Board onClick={onClickColumn} pieces={pieces} />
-      <button data-testid="restart" className="Restart" onClick={onRestart}>Restart</button>
+      <button data-testid="restart"
+              className="Restart"
+              onClick={onRestart}>Restart</button>
     </div>
   );
 }
