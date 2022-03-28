@@ -58,7 +58,7 @@ describe('connect4',  () => {
     expect(screen.getByTestId('nextPlayer')).toHaveClass('Player-Y');
   });
 
-  it('has a Restart button', () => {
+  it('clears the game when Restart', () => {
     const column = screen.getAllByTestId('column')[3];
     const slots = getAllByTestId(column, 'slot');
     expect(screen.getByTestId('nextPlayer')).toHaveClass('Player-Y');
