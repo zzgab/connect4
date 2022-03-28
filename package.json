@@ -19,7 +19,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --noStackTrace --watchAll",
+    "test1": "JEST_HIDE_USAGE=1 react-scripts test --reporters=jest-mocha-spec-reporter --silent --noStackTrace --watchAll",
+    "test_": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -39,5 +41,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "jest-mocha-spec-reporter": "^1.0.17"
   }
 }
