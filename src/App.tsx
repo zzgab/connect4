@@ -1,85 +1,19 @@
-import React, {useState} from "react";
+import React from "react";
 import './App.css';
+import {NextPlayer} from "./components/NextPlayer";
+import {Player} from "./types";
+import {Board} from "./components/Board";
+import {useBoard} from "./hooks/useBoard";
 
-type Player = 'R' | 'Y';
-const initialPlayer: Player = 'Y';
-type Piece = Player | '';
+interface Props {
+  initialPlayer?: Player;
+}
 
-const Slot = ({piece}: {piece: Piece}) => {
-  return (
-    <div data-testid="slot"
-         className={`Slot ${piece ? `PlayerColor Player-${piece}` : 'Free'}`}
-    />
-  );
-};
-
-const Column = ({pieces, onClick}: {pieces: Piece[]; onClick: () => void}) => {
-  return (
-    <div data-testid={"column"}
-         className="Column"
-         onClick={onClick}
-    >
-      {pieces.map((cell, i) =>
-        <Slot key={i}
-              piece={cell}
-      />)}
-    </div>
-  );
-};
-
-const Board = ({onClick, pieces}: {
-  pieces: Piece[][]; onClick: (colNum: number) => void
-}) => {
-  return (
-    <div data-testid="board"
-         className="Board"
-    >
-      {pieces.map((columnOfPieces, i) =>
-        <Column key={i}
-          onClick={() => onClick(i)}
-          pieces={columnOfPieces}
-        />)}
-    </div>
-  );
-};
-
-const NextPlayer = ({player}: {player: Player}) => {
-  return (
-    <div data-testid="nextPlayer"
-         className={`NextPlayer PlayerColor Player-${player}`}
-    />
-  );
-};
-
-const initialBoard = Array(7).fill(
-  Array(6).fill('')
-) as Piece[][];
-
-function App() {
-  const [player, setPlayer] = useState(initialPlayer);
-  const [pieces, setPieces] = useState(initialBoard);
-
-  const lowestFreeSlotInCol = (colNum: number) =>
-    pieces[colNum].findIndex(piece => piece === '');
+export const App = ({initialPlayer}: Props) => {
+  const {player, pieces, onRestart, onPlayColumn} = useBoard(initialPlayer ?? "Y");
 
   const onClickColumn = (colNum: number) => {
-    const floorNum = lowestFreeSlotInCol(colNum);
-    if (floorNum === -1) {
-      return;
-    }
-    setPieces(pieces.map((colOfPieces, col) =>
-      col !== colNum
-        ? colOfPieces
-        : colOfPieces.map((piece, floor) =>
-          floor !== floorNum ? piece : player
-        )
-    ));
-    setPlayer(player === 'R' ? 'Y' : 'R');
-  };
-
-  const onRestart = () => {
-    setPlayer(initialPlayer);
-    setPieces(initialBoard);
+      onPlayColumn(colNum);
   };
 
   return (
@@ -92,5 +26,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

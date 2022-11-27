@@ -29,14 +29,6 @@
   flex: 1;
 }
 
-.NextPlayer {
-  width: 70vw;
-  height: 1vh;
-  max-width: 70vh;
-  border: solid thin black;
-  margin: auto auto 20px;
-}
-
 .PlayerColor.Player-R {
   background-color: red;
 }

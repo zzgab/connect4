@@ -1,15 +1,15 @@
 import React from 'react';
 import {render, screen, within} from "@testing-library/react";
-import App from './App';
+import { App } from './App';
 
 it('renders game board', () => {
   render(<App />);
-  // expect(screen.getByTestId('board')).toBeInTheDocument();
+  expect(screen.getByTestId('board')).toBeInTheDocument();
 });
 
 it('has 7 columns', () => {
   render(<App />);
-  // expect(screen.getAllByTestId('column').length).toBe(7);
+  expect(screen.getAllByTestId('column').length).toBe(7);
 });
 
 it('has 6 slots in every column', () => {
