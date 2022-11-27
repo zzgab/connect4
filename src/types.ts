@@ -1,2 +1,3 @@
 export type Player = 'R' | 'Y';
-export type Piece = Player | '';
+export type Coin = Player | '';
+export type Stack = Coin[];

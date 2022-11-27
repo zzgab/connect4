@@ -1,10 +1,10 @@
 import React from "react";
-import {Piece} from "../types";
+import {Coin} from "../types";
 
-export const Slot = ({piece}: { piece: Piece }) => {
+export const Slot = ({coin}: { coin: Coin }) => {
     return (
         <div data-testid="slot"
-             className={`Slot ${piece ? `PlayerColor Player-${piece}` : 'Free'}`}
+             className={`Slot ${coin ? `PlayerColor Player-${coin}` : 'Free'}`}
         />
     );
 };

@@ -1,16 +1,16 @@
-import {Piece} from "../types";
+import {Coin} from "../types";
 import {Slot} from "./Slot";
 import React from "react";
 
-export const Column = ({pieces, onClick}: { pieces: Piece[]; onClick: () => void }) => {
+export const Column = ({coins, onClick}: { coins: Coin[]; onClick: () => void }) => {
     return (
         <div data-testid={"column"}
              className="Column"
              onClick={onClick}
         >
-            {pieces.map((cell, i) =>
+            {coins.map((cell, i) =>
                 <Slot key={i}
-                      piece={cell}
+                      coin={cell}
                 />)}
         </div>
     );

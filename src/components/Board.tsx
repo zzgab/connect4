@@ -1,18 +1,18 @@
-import {Piece} from "../types";
+import {Stack} from "../types";
 import {Column} from "./Column";
 import React from "react";
 
-export const Board = ({onClick, pieces}: {
-    pieces: Piece[][]; onClick: (colNum: number) => void
+export const Board = ({onClick, boardMap}: {
+    boardMap: Stack[]; onClick: (colNum: number) => void
 }) => {
     return (
         <div data-testid="board"
              className="Board"
         >
-            {pieces.map((columnOfPieces, i) =>
+            {boardMap.map((column, i) =>
                 <Column key={i}
                         onClick={() => onClick(i)}
-                        pieces={columnOfPieces}
+                        coins={column}
                 />)}
         </div>
     );

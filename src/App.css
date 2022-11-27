@@ -10,6 +10,10 @@
   max-width: 70vh;
 }
 
+.App.Winner .Board {
+  background-color: silver;
+}
+
 .App {
   padding-top: 5vh;
 }

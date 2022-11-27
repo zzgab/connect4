@@ -1,41 +1,56 @@
 import {useState} from "react";
-import {Piece, Player} from "../types";
+import {Player, Stack} from "../types";
+import {detectWinner} from "../logic/detectWinner";
 
 const emptyBoard = Array(7).fill(
     Array(6).fill('')
-) as Piece[][];
+) as Stack[];
+
 
 export const useBoard = (initialPlayer: Player) => {
     const [player, setPlayer] = useState<Player>(initialPlayer);
-    const [pieces, setPieces] = useState(emptyBoard);
+    const [boardMap, setBoardMap] = useState(emptyBoard);
+    const [winner, setWinner] = useState(false);
 
     const onRestart = () => {
         setPlayer(initialPlayer);
-        setPieces(emptyBoard);
+        setBoardMap(emptyBoard);
+        setWinner(false);
     };
 
     const lowestFreeSlotInCol = (colNum: number) =>
-        pieces[colNum].findIndex(piece => piece === '');
+        boardMap[colNum].findIndex(piece => piece === '');
 
     const onPlayColumn = (colNum: number) => {
         const floorNum = lowestFreeSlotInCol(colNum);
         if (floorNum === -1) {
             return;
         }
-        setPieces(pieces.map((colOfPieces, col) =>
-            col !== colNum
-                ? colOfPieces
-                : colOfPieces.map((piece, floor) =>
-                    floor !== floorNum ? piece : player
-                )
-        ));
-        setPlayer(player === 'R' ? 'Y' : 'R');
+        setBoardMap((prevBoard) => {
+            const newBoard = prevBoard.map((colOfPieces, col) =>
+                col !== colNum
+                    ? colOfPieces
+                    : colOfPieces.map((piece, floor) =>
+                        floor !== floorNum ? piece : player
+                    )
+            );
+
+            const isGameWon = detectWinner(newBoard, colNum);
+            if (!isGameWon) {
+                setPlayer(player === 'R' ? 'Y' : 'R');
+            }
+            else {
+                setWinner(true);
+            }
+            return newBoard;
+        });
     };
 
     return {
         player,
-        pieces,
+        boardMap,
         onRestart,
-        onPlayColumn
+        onPlayColumn,
+        winner
     }
 };
