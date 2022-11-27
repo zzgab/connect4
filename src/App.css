@@ -57,6 +57,9 @@
 .Restart {
   display: block;
   margin: 6vh auto;
+  width: 64px;
+  height: 64px;
+  font-size: xx-large;
 }
 
 .Restart::after {
